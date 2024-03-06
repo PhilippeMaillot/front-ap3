@@ -27,13 +27,13 @@ function displayClubs(data) {
   document.getElementById("club-container").innerHTML = html;
 }
 
-document.getElementById("sort-select").addEventListener("change", function () {
+/* document.getElementById("sort-select").addEventListener("change", function () {
   let sortedData = [...clubsData];
   if (this.value) {
     sortedData.sort((a, b) => a[this.value].localeCompare(b[this.value]));
   }
   displayClubs(sortedData);
-});
+}); */
 
 document.getElementById("search").addEventListener("input", function () {
   let searchString = this.value.toLowerCase();
