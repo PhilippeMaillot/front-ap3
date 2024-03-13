@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   const addProductForm = document.getElementById("addProductForm");
-  addProductForm.addEventListener("submit", handleUpload);
+  addProductForm.addEventListener("submit", handleAdd);
 
   api
     .fetchProducts()
@@ -53,46 +53,17 @@ function displayProducts(products) {
   });
 }
 
-function handleUpload(event) {
-    event.preventDefault();
-
-    const productName = document.getElementById("productName").value;
-    const productDescription = document.getElementById("productDescription").value;
-    const productPrice = document.getElementById("productPrice").value;
-    const productStock = document.getElementById("productStock").value;
-    const productImage = document.getElementById("productImage").files[0];
-    console.log(productImage);
-
-    const sanitizeHtml = (string) => {
-        const temp = document.createElement("div");
-        temp.textContent = string;
-        return temp.innerHTML;
-      };
-    const formData = {
-    product_title: sanitizeHtml(productName),
-    product_description: sanitizeHtml(productDescription),
-    product_price: sanitizeHtml(productPrice),
-    stock: sanitizeHtml(productStock),
-    product_image: productImage
-    }
-
-    api.addProduct(formData)
-        .then((response) => {
-            // Réponse de l'API après l'ajout du produit
-            console.log("Réponse de l'API :", response);
-            // Mettre à jour l'affichage des produits
-            api.fetchProducts()
-                .then((products) => {
-                    allProducts = products[0];
-                    displayProducts(allProducts);
-                })
-                .catch((error) => {
-                    console.error("Error fetching products:", error);
-                });
-        })
-        .catch((error) => {
-            console.error("Error adding product:", error);
-        });
+function handleAdd(event) {
+  event.preventDefault();
+  const formData = {
+    product_title: document.getElementById("productTitle").value,
+    product_description: document.getElementById("productDescription").value,
+    product_price: document.getElementById("productPrice").value,
+    stock: document.getElementById("productStock").value,
+    product_img: document.getElementById("selectedImage").value,
+  };
+  api.addProduct(formData);
+  window.location.reload();
 }
 
 function handleEdit(event) {
@@ -107,4 +78,32 @@ function handleDelete(event) {
   console.log("Supprimer le produit avec l'ID:", productId);
 }
 
+function afficherPopup(imageUrl) {
+  const popupElement = document.getElementById("popup");
+  popupElement.innerHTML = `<img src="${imageUrl}" alt="Image en popup">`;
+  popupElement.style.display = "block";
+}
+
+function masquerPopup() {
+  const popupElement = document.getElementById("popup");
+  popupElement.style.display = "none";
+}
+
+const selectElement = document.getElementById("selectedImage");
+selectElement.addEventListener("change", function (event) {
+  const selectedOption = event.target.selectedOptions[0];
+  const filename = selectedOption.value;
+  const imagePath = selectedOption.style.backgroundImage.replace(
+    /url\(['"]?(.*?)['"]?\)/i,
+    "$1"
+  );
+  if (filename === "") {
+    masquerPopup();
+    return;
+  }
+  console.log("imagePath:", imagePath);
+  afficherPopup(imagePath);
+});
+
 api.checkAdmin();
+api.showImages();

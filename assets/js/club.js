@@ -11,7 +11,7 @@ function displayClubs(data) {
   let html = "";
   data.forEach((club) => {
     // Ajouter une condition pour ne pas afficher les clubs avec club_name égal à "M2L"
-    if (club.club_name !== "M2L") {
+    if (club.club_name !== "M2L" && club.club_name !== "admin3") {
       html += `
                 <div>
                     <hr></hr>
@@ -27,13 +27,13 @@ function displayClubs(data) {
   document.getElementById("club-container").innerHTML = html;
 }
 
-document.getElementById("sort-select").addEventListener("change", function () {
+/*document.getElementById("sort-select").addEventListener("change", function () {
   let sortedData = [...clubsData];
   if (this.value) {
     sortedData.sort((a, b) => a[this.value].localeCompare(b[this.value]));
   }
   displayClubs(sortedData);
-});
+});*/
 
 document.getElementById("search").addEventListener("input", function () {
   let searchString = this.value.toLowerCase();
