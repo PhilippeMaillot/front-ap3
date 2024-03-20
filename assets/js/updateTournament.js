@@ -13,8 +13,35 @@ function tournamentList() {
 
   api.fetchTournament()
     .then((data) => {
+      // Filtrer les tournois à venir
+      const upcomingTournaments = data[0].filter(tournament => {
+        // Convertir les dates en objets Date
+        const tournamentDate = new Date(tournament.tournament_date);
+        const currentDate = new Date();
+  
+        // Ignorer l'heure, les minutes et les secondes
+        const tournamentDateWithoutTime = new Date(
+            tournamentDate.getFullYear(),
+            tournamentDate.getMonth(),
+            tournamentDate.getDate()
+        );
+        const currentDateWithoutTime = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
+            currentDate.getDate()
+        );
+        // Comparer les dates sans tenir compte de l'heure
+        return tournamentDateWithoutTime >= currentDateWithoutTime;
+      });
 
-      data[0].forEach((tournament) => {
+      // Trier les tournois à venir par date
+      upcomingTournaments.sort((a, b) => {
+        const dateA = new Date(a.tournament_date);
+        const dateB = new Date(b.tournament_date);
+        return dateA - dateB;
+      });
+
+      upcomingTournaments.forEach((tournament) => {
         const optionElement = document.createElement("option");
         optionElement.value = tournament.id_tournament;
         optionElement.textContent = tournament.tournament_name;
