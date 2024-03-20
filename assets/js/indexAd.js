@@ -39,3 +39,29 @@ api.fetchUsers().then(usersArray => {
     console.error('Une erreur s\'est produite lors de la récupération des tournois:', error);
 });
 
+
+api.fetchTournament().then(tournamentsArray => {
+    if (Array.isArray(tournamentsArray) && tournamentsArray.length > 0) {
+        const tournaments = tournamentsArray[0];
+        const currentDate = new Date();
+        const upcomingTournaments = tournaments.filter(tournament => {
+            const tournamentDate = new Date(tournament.tournament_date);
+            const tournamentDateWithoutTime = new Date(
+                tournamentDate.getFullYear(),
+                tournamentDate.getMonth(),
+                tournamentDate.getDate()
+            );
+            const currentDateWithoutTime = new Date(
+                currentDate.getFullYear(),
+                currentDate.getMonth(),
+                currentDate.getDate()
+            );
+            return tournamentDateWithoutTime >= currentDateWithoutTime;
+        });
+        document.querySelector('.card-title-going-tournament').textContent = upcomingTournaments.length;
+    } else {
+        console.error('La réponse de l\'API n\'est pas conforme:', tournamentsArray);
+    }
+}).catch(error => {
+    console.error('Une erreur s\'est produite lors de la récupération des tournois:', error);
+});
