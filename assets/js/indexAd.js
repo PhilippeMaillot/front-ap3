@@ -26,6 +26,7 @@ api.fetchTournament().then(tournamentsArray => {
 });
 
 api.fetchUsers().then(usersArray => {
+    console.log('userarray : ' , usersArray);
     if (Array.isArray(usersArray) && usersArray.length > 0) {
         console.log(usersArray);
         const users = usersArray[0];
