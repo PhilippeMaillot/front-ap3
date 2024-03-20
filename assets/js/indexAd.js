@@ -25,3 +25,15 @@ api.fetchTournament().then(tournamentsArray => {
     console.error('Une erreur s\'est produite lors de la récupération des tournois:', error);
 });
 
+api.fetchUsers().then(usersArray => {
+    if (Array.isArray(usersArray) && usersArray.length > 0) {
+        const users = usersArray[0];
+        const numberOfUser = users.length;
+        document.querySelector('.card-title-users').testContent = numberOfUser;
+        } else {
+            console.error('la réponse de l\'API n\'est pas conforme:', usersArray);
+        }
+}).catch(error => {
+    console.error('Une erreur s\'est produite lors de la récupération des tournois:', error);
+});
+

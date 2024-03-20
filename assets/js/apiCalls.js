@@ -188,7 +188,7 @@ class ApiCalls {
     }
   }
 
-  // Méthodes pour les utilisateurs
+  // Méthodes pour les utilisateurs (omnimatch)
 
   async getUserAndClubInfo() {
     const token = localStorage.getItem("token");
@@ -297,6 +297,30 @@ class ApiCalls {
       });
       const data = await response.json();
       return data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return [];
+    }
+  }
+
+  // Méthodes pour les utilisateurs (omnibet)
+
+  async fetchUsers() {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(`${HOST}/mobileuser`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erreur HTTP : ${response.status}`);
+      }
+      const data = await response.json();
+      return [data];
     } catch (error) {
       console.error("Error fetching data:", error);
       return [];
