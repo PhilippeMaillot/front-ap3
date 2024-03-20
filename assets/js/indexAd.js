@@ -27,6 +27,7 @@ api.fetchTournament().then(tournamentsArray => {
 
 api.fetchUsers().then(usersArray => {
     if (Array.isArray(usersArray) && usersArray.length > 0) {
+        console.log(usersArray);
         const users = usersArray[0];
         const numberOfUser = users.length;
         document.querySelector('.card-title-users').testContent = numberOfUser;
