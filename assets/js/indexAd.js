@@ -30,7 +30,7 @@ api.fetchUsers().then(usersArray => {
         console.log(usersArray);
         const users = usersArray[0];
         const numberOfUser = users.length;
-        document.querySelector('.card-title-users').testContent = numberOfUser;
+        document.querySelector('.card-title-mobile').testContent = numberOfUser;
         } else {
             console.error('la réponse de l\'API n\'est pas conforme:', usersArray);
         }
