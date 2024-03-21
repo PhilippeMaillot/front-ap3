@@ -71,7 +71,7 @@ button {
     margin: 4px 2px;
     cursor: pointer; /* Change le curseur en main lors du survol */
     transition-duration: 0.4s; /* Durée de l'effet de survol */
-    border-radius: 10%; /* Bords arrondis */
+    border-radius: 50%; /* Bords arrondis */
 }
 
 button:hover {
