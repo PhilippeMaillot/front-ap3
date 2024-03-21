@@ -60,7 +60,7 @@
 
 
 button {
-    background-color: #df4e4e; /* Bleu 4e73df */
+    background-color: #4e73df; /* Bleu */
     border: none;
     color: white; /* Texte blanc */
     padding: 10px 20px; /* Espacement intérieur */
@@ -71,7 +71,7 @@ button {
     margin: 4px 2px;
     cursor: pointer; /* Change le curseur en main lors du survol */
     transition-duration: 0.4s; /* Durée de l'effet de survol */
-    border-radius: 50%; /* Bords arrondis */
+    border-radius: 15%; /* Bords arrondis */
 }
 
 button:hover {
