@@ -38,8 +38,6 @@
 
 .card-chart .card-header {
     background: linear-gradient(to right, #4e73df, #f6f6f6);
-    border-top-left-radius: 10%;
-    border-top-right-radius: 10%;
 }
 
 .card-chart .card-footer {
@@ -53,10 +51,11 @@
     line-height: 1.429;
     background-color: transparent;
     border-top: 1px solid #ddd;
-    border-bottom-left-radius: 10%;
-    border-bottom-right-radius: 10%;
 }
 
+.card-chart {
+    border-radius: 10%;
+}
 
 
 button {
