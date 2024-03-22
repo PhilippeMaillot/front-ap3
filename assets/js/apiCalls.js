@@ -249,7 +249,7 @@ class ApiCalls {
     try {
       const adminStatus = await this.isAdmin();
       if (!adminStatus) {
-        window.location.href = "./index.html";
+        window.location.href = "./index-admin.html";
       }
     } catch (error) {
       console.error("Une erreur s'est produite :", error);
