@@ -63,12 +63,6 @@ function handleAdd(event) {
     stock: document.getElementById("productStock").value
   };
   api.addProduct(formData)
-    .then(() => {
-      window.location.reload();
-    })
-    .catch(error => {
-      console.error('Erreur lors de l\'ajout du produit :', error);
-    });
 }
 
 function handleEdit(event) {

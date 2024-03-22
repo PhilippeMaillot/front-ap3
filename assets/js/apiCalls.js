@@ -61,7 +61,7 @@ class ApiCalls {
         throw new Error(`Erreur HTTP : ${response.status}`);
       }
       const data = await response.json();
-      console.log("data (tournament) : " , data);
+      console.log("data (tournament) : ", data);
       return [data];
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -231,7 +231,7 @@ class ApiCalls {
 
       const data = await response.json();
       const userRole = data[0].user_role;
-      
+
       if (userRole === 1) {
         return true;
       } else {
@@ -321,7 +321,7 @@ class ApiCalls {
         throw new Error(`Erreur HTTP : ${response.status}`);
       }
       const data = await response.json();
-      console.log("data : " , data);
+      console.log("data : ", data);
       return [data];
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -422,14 +422,27 @@ class ApiCalls {
 
   async addProduct(formData) {
     const token = localStorage.getItem("token");
-    fetch(`${HOST}/product/add`, {
-    method: "POST",
-    body: JSON.stringify(formData),
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  })
+    try {
+      const response = await fetch(`${HOST}/product/add`, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Erreur lors de l\'ajout du produit.');
+      }
+      const responseData = await response.json();
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
+      return responseData;
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout du produit :', error);
+      throw error;
+    }
   }
 
   async deleteProduct(productId) {
@@ -456,7 +469,7 @@ class ApiCalls {
     selectElement.innerHTML = '<option value="">Sélectionnez une image</option>';
     const requestOptions = {
       headers: {
-          'Authorization': `Bearer ${token}`
+        'Authorization': `Bearer ${token}`
       }
     };
     fetch(`${HOST}/product/images`, requestOptions)
