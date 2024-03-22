@@ -62,7 +62,7 @@ function handleAdd(event) {
     stock: document.getElementById("productStock").value,
     product_img: document.getElementById("selectedImage").value,
   };
-  api.addProduct(formData);
+  await api.addProduct(formData);
   window.location.reload();
 }
 
