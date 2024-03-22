@@ -78,6 +78,6 @@ button:hover {
     color: white;
 }
 
-.onGoingTournament {
+a {
     text-decoration: none;
 }
