@@ -62,9 +62,11 @@ function handleAdd(event) {
     product_img: document.getElementById("selectedImage").value,
     stock: document.getElementById("productStock").value
   };
+  console.log('form data' , formData);
   api.addProduct(formData)
     .then(() => {
-      window.location.reload();
+      console.log('fini le then');
+      //window.location.reload();
     })
     .catch(error => {
       console.error('Erreur lors de l\'ajout du produit :', error);
