@@ -421,6 +421,7 @@ class ApiCalls {
   }
 
   async addProduct(formData) {
+    console.log('form data dans apiCalls : ', formData);
     const token = localStorage.getItem("token");
     fetch(`${HOST}/product/add`, {
     method: "POST",
