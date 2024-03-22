@@ -437,7 +437,7 @@ class ApiCalls {
       const responseData = await response.json();
       setTimeout(() => {
         window.location.reload();
-      }, 500);
+      }, 300);
       return responseData;
     } catch (error) {
       console.error('Erreur lors de l\'ajout du produit :', error);
